@@ -1,9 +1,29 @@
+# パラメータの取得
 import sys
+
+# 画像処理
 from PIL import Image
+
+# 画像のテキストを抽出
 import pyocr
+
+# pyocrモジュールのbuilders関数()を使用
 import pyocr.builders
+
+# 日付の情報を持っているオブジェクト
+import datetime
+
 # 画像を取る
 tools = pyocr.get_available_tools()
+
+
+# def say_print():
+#     txt = datetime in year,
+#         datetime in month,
+#         datetime in day
+
+
+#     print(txt)
 
 # もしも文字数が0だったら(ツールが何もなければ(ツールは配列になってる))表示して抜け出る
 if len(tools) == 0:
@@ -15,9 +35,10 @@ tool = tools[0]
 print("Will use tool '%s'" % (tool.get_name()))
 # 例: Will use tool 'Tesseract (sh)'
 
+
 # メイン関数を定義
 def main():
-    
+
     sum = 0
     # 要素を1つずつ取り出すのを繰り返す
     for i in range(1, 6):
@@ -38,5 +59,14 @@ def main():
         f.writelines(str(sum))
 
 
+def print_kal_data():
+    now = datetime.date.today()
+    today = now.strftime("%Y/%m/%d/")
+    with open("text.txt", "r") as r:
+        sum = r.read()
+    print(str(today) + "の摂取カロリーは" + str(sum) + "kcalです")
+
+
 if __name__ == "__main__":
     main()
+    print_kal_data()
